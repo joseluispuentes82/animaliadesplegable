@@ -1,0 +1,8 @@
+<div class="row mb-2">
+  <hr class='w-100'>
+  <div class="col-10 col-sm-10 col-md-4 col-lg-4 col-xl-4"><a class="" data-toggle="modal"
+      data-target="#modalUsuario" (click)='usuarioSeleccionado.emit(usuario)'> {{usuario.nombre | titlecase}}</a></div>
+  <div class="col-10 col-sm-10 col-md-4 col-lg-4 col-xl-4">{{usuario.password}}</div>
+  <div class="col-10 col-sm-10 col-md-4 col-lg-4 col-xl-4">{{usuario.tipo | titlecase}}</div>
+</div>
+

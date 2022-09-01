@@ -1,0 +1,48 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.5.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+	id 'application'
+}
+
+group = 'es.puentes'
+version = '1.0.0'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+	
+	maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'org.postgresql:postgresql'
+	implementation 'com.github.ANIMALIA-CAN-RESORT:residenciaAnimales-libreria:0.0.1'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+	//implementation 'io.woo:htmltopdf:1.0.6' //peta al desplegar en heroku por implicar 800 megas
+	implementation 'org.thymeleaf:thymeleaf:3.0.11.RELEASE'
+    implementation 'org.xhtmlrenderer:flying-saucer-pdf:9.1.20'
+    //para levantar la documentacion en swagger
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+    implementation 'io.springfox:springfox-swagger2:3.0.0'
+    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+    //implementation project(':residenciaAnimales-libreria')
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
+
+task cloneJvmProfile {
+    ext.profile = System.getProperty("spring.profiles.active")
+    if (profile != null) {
+        println "Setting $profile profile in bootRun"
+        bootRun.systemProperties.put("spring.profiles.active", profile)
+    }
+}

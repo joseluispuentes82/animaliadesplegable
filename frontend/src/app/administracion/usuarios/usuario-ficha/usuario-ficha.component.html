@@ -1,0 +1,38 @@
+<form #usuarioForm="ngForm">
+  <div class="form-row py-2">
+    <div class="col-lg-4 col-md-12">
+      <label><b>ALIAS<sup class="text-danger">*</sup></b></label>
+      <input type="text" class="form-control" [(ngModel)]="usuario.nombre" placeholder="Alias del usuario" name="nombre"
+        required #nombre="ngModel" [ngClass]="{ 'is-invalid': nombre.invalid && (nombre.dirty || nombre.touched),
+        'is-valid': !nombre.invalid }"/>
+      <div class="text-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+        <div *ngIf="nombre.errors.required">
+            El Alias del usuario es obligatorio
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-12">
+      <label><b>PASSWORD<sup class="text-danger">*</sup></b></label>
+      <input type="password" class="form-control" [(ngModel)]="usuario.password" placeholder="Password del usuario" name="password"
+        required minlength="4" #password="ngModel" [ngClass]="{ 'is-invalid': password.invalid && (password.dirty || password.touched),
+        'is-valid': !password.invalid }"/>
+      <div class="text-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
+        <div *ngIf="password.errors.required">
+            El Password del usuario es obligatorio
+        </div>
+        <div *ngIf="password.errors.minlength">
+          El Password del usuario debe tener al menos 4 carácteres
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-12">
+      <label><b>TIPO DE USUARIO<sup class="text-danger">*</sup></b></label><br>
+      <input type="radio" name="tipo" [(ngModel)]='usuario.tipo' value="administrador" class="mr-2">Administrador
+      <input type="radio" name="tipo" [(ngModel)]='usuario.tipo' value="empleado" class="mr-2 ml-2" checked>Empleado
+    </div>
+  </div>
+  <div class="form-row justify-content-between pt-5">
+    <button type="button" class="btn btn-success" (click)="editar()" [disabled]="!usuarioForm.form.valid">Guardar</button>
+    <button type="button" class="btn btn-danger" (click)="eliminar()">Eliminar</button>
+  </div>
+</form>
